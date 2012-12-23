@@ -21,7 +21,7 @@ class MusCover {
      * @return mixed Server answer or NULL in case of connection error
      */
     private function LoadFromApi($method, $params) {
-        $url = "http://ws.audioscrobbler.com/2.0/?method={$method}&api_key={$this->ApiKey}&format=json&autocorrect=1";
+        $url = "http://ws.audioscrobbler.com/2.0/?method={$method}&api_key={$this->ApiKey}&format=json";
         foreach($params as $k => $v) {
             $url .= '&' . $k . '='. rawurlencode($v);
         }
@@ -70,7 +70,7 @@ class MusCover {
      * @return array Covers in all sizes
      */
     public function SearchByTrack($artist, $track) {
-        $data = $this->LoadFromApi('track.getInfo', array('artist' => $artist, 'track' => $track));
+        $data = $this->LoadFromApi('track.getInfo', array('artist' => $artist, 'track' => $track, 'autocorrect' => 1));
 
         // Default dumb images
         $images = array(
@@ -105,7 +105,7 @@ class MusCover {
      * @return array Covers in all sizes
      */
     public function SearchByAlbum($artist, $album) {
-        $data = $this->LoadFromApi('album.getInfo', array('artist' => $artist, 'album' => $album));
+        $data = $this->LoadFromApi('album.getInfo', array('artist' => $artist, 'album' => $album, 'autocorrect' => 1));
 
         // Default dumb images
         $images = array(
@@ -140,7 +140,7 @@ class MusCover {
      * @return array Photos in all sizes
      */
     public function SearchByArtist($artist) {
-        $data = $this->LoadFromApi('artist.getInfo', array('artist' => $artist));
+        $data = $this->LoadFromApi('artist.getInfo', array('artist' => $artist, 'autocorrect' => 1));
 
         // Default dumb images
         $images = array(
