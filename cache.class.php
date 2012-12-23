@@ -5,7 +5,7 @@ class Cache {
     private $Db;
 
     /**
-     * Конструктор, выполняет подключение к БД
+     * Class constuctor, tries to connect to MySQL database
      */
     function __construct() {
         if (MYSQL_HOST == '') {
@@ -24,10 +24,10 @@ class Cache {
     }
 
     /**
-     * Выполняем поиск по кешу в БД
-     * @param string $key Ключ по которому будет выполнен поиск
+     * Search selected key in database
+     * @param string $key Cache key
      *
-     * @return mixed Массив с набором картинок или false если ничего не найдено
+     * @return mixed Array with images or FALSE if nothing was found
      */
     public function Load($key) {
         if (!$this->DbConnected) {
@@ -39,11 +39,11 @@ class Cache {
     }
 
     /**
-     * Сохраняем знаечение в кеш
-     * @param string $key Ключ
-     * @param mixed $value Значение
+     * Save data to database
+     * @param string $key Cache key
+     * @param mixed $value Cache value
      *
-     * @return boolean Сохранено ли значение
+     * @return boolean TRUE if data is saved, FALSE in case of data already exists or another error
      */
     public function Save($key, $value) {
         if (!$this->DbConnected) {

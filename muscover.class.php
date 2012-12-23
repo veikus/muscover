@@ -8,11 +8,11 @@ class MusCover {
     }
 
     /**
-     * Выполняем запрос к api last.fm
-     * @param string $method Название метода
-     * @param array $params Набор параметров для выбранного метода
+     * Make request to last.fm api
+     * @param string $method Method name
+     * @param array $params Associative array of parameters for selected method
      *
-     * @return mixed Ответ сервера или null в случае ошибки
+     * @return mixed Server answer or NULL in case of connection error
      */
     private function LoadFromApi($method, $params) {
         $url = "http://ws.audioscrobbler.com/2.0/?method={$method}&api_key={$this->ApiKey}&format=json&autocorrect=1";
@@ -20,7 +20,7 @@ class MusCover {
             $url .= '&' . $k . '='. rawurlencode($v);
         }
 
-        $data = file_get_contents($url); // TODO (Артем): Переделать на curl
+        $data = file_get_contents($url); // TODO (Artem): Rewrite to curl
         if (!$data) {
             return false;
         }
@@ -29,16 +29,16 @@ class MusCover {
     }
 
     /**
-     * Выполняем поиск по треку
-     * @param string $artist Имя исполнителя
-     * @param string $track Название трека
+     * Search with artist and track name
+     * @param string $artist Artist name
+     * @param string $track Track name
      *
-     * @return string Ссылка на картинку альбома (или заглушку)
+     * @return array Covers in all sizes
      */
     public function SearchByTrack($artist, $track) {
         $data = $this->LoadFromApi('track.getInfo', array('artist' => $artist, 'track' => $track));
 
-        // Набор стандартных заглушек
+        // Default
         $images = array(
             'small'         => 'http://placehold.it/64x64',
             'medium'        => 'http://placehold.it/126x126',
@@ -50,7 +50,7 @@ class MusCover {
             return $images;
         }
 
-        // Заполняем список картинок
+        // Fill array with real images
         foreach($data['track']['album']['image'] as $v) {
             $size = $v['size'];
 
@@ -61,4 +61,6 @@ class MusCover {
 
         return $images;
     }
+
+
 }
