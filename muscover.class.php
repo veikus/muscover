@@ -38,7 +38,7 @@ class MusCover {
     public function SearchByTrack($artist, $track) {
         $data = $this->LoadFromApi('track.getInfo', array('artist' => $artist, 'track' => $track));
 
-        // Default
+        // Default dumb images
         $images = array(
             'small'         => 'http://placehold.it/64x64',
             'medium'        => 'http://placehold.it/126x126',
@@ -53,8 +53,9 @@ class MusCover {
         // Fill array with real images
         foreach($data['track']['album']['image'] as $v) {
             $size = $v['size'];
+            $url  = $v['#text'];
 
-            if (array_key_exists($size, $images)) {
+            if (!empty($url) && array_key_exists($size, $images)) {
                $images[$size] = $v['#text'];
             }
         }
