@@ -4,3 +4,5 @@ RewriteRule ^track/(.*)/(.*)/(.*)$      load_track.php?artist=$1&track=$2&size=$
 RewriteRule ^track/(.*)/(.*)$           load_track.php?artist=$1&track=$2&size=small   [L]
 RewriteRule ^album/(.*)/(.*)/(.*)$      load_album.php?artist=$1&album=$2&size=$3      [L]
 RewriteRule ^album/(.*)/(.*)$           load_album.php?artist=$1&album=$2&size=small   [L]
+RewriteRule ^artist/(.*)/(.*)$          load_artist.php?artist=$1&size=$2               [L]
+RewriteRule ^artist/(.*)$               load_artist.php?artist=$1&size=small            [L]

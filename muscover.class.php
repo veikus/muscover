@@ -97,4 +97,39 @@ class MusCover {
 
         return $images;
     }
+
+
+    /**
+     * Search artist photo with artist name
+     * @param string $artist Artist name
+     *
+     * @return array Photos in all sizes
+     */
+    public function SearchByArtist($artist) {
+        $data = $this->LoadFromApi('artist.getInfo', array('artist' => $artist));
+
+        // Default dumb images
+        $images = array(
+            'small'         => 'http://placehold.it/64x64',
+            'medium'        => 'http://placehold.it/126x126',
+            'large'         => 'http://placehold.it/174x174',
+            'extralarge'    => 'http://placehold.it/300x300',
+        );
+
+        if (empty($data['artist']['image'])) {
+            return $images;
+        }
+
+        // Fill array with real images
+        foreach($data['artist']['image'] as $v) {
+            $size = $v['size'];
+            $url  = $v['#text'];
+
+            if (!empty($url) && array_key_exists($size, $images)) {
+                $images[$size] = $v['#text'];
+            }
+        }
+
+        return $images;
+    }
 }
