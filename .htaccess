@@ -2,3 +2,5 @@ RewriteEngine On
 RewriteBase /
 RewriteRule ^track/(.*)/(.*)/(.*)$      load_track.php?artist=$1&track=$2&size=$3      [L]
 RewriteRule ^track/(.*)/(.*)$           load_track.php?artist=$1&track=$2&size=small   [L]
+RewriteRule ^album/(.*)/(.*)/(.*)$      load_album.php?artist=$1&album=$2&size=$3      [L]
+RewriteRule ^album/(.*)/(.*)$           load_album.php?artist=$1&album=$2&size=small   [L]

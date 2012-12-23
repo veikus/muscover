@@ -62,5 +62,38 @@ class MusCover {
         return $images;
     }
 
+    /**
+     * Search album cover with artist and album name
+     * @param string $artist Artist name
+     * @param string $album Album name
+     *
+     * @return array Covers in all sizes
+     */
+    public function SearchByAlbum($artist, $album) {
+        $data = $this->LoadFromApi('album.getInfo', array('artist' => $artist, 'album' => $album));
 
+        // Default dumb images
+        $images = array(
+            'small'         => 'http://placehold.it/64x64',
+            'medium'        => 'http://placehold.it/126x126',
+            'large'         => 'http://placehold.it/174x174',
+            'extralarge'    => 'http://placehold.it/300x300',
+        );
+
+        if (empty($data['album']['image'])) {
+            return $images;
+        }
+
+        // Fill array with real images
+        foreach($data['album']['image'] as $v) {
+            $size = $v['size'];
+            $url  = $v['#text'];
+
+            if (!empty($url) && array_key_exists($size, $images)) {
+                $images[$size] = $v['#text'];
+            }
+        }
+
+        return $images;
+    }
 }
