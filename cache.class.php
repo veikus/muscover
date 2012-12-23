@@ -1,7 +1,7 @@
 <?php
 class Cache {
     private $CacheTable  = MYSQL_TABLE;
-    private $IsConnected = false;
+    private $DbConnected = false;
     private $Db;
 
     /**
@@ -18,7 +18,7 @@ class Cache {
             return false;
         }
 
-        $this->IsConnected = true;
+        $this->DbConnected = true;
         $this->Db->set_charset('UTF8');
         return true;
     }
@@ -30,7 +30,7 @@ class Cache {
      * @return mixed Массив с набором картинок или false если ничего не найдено
      */
     public function Load($key) {
-        if (!$this->IsConnected) {
+        if (!$this->DbConnected) {
             return false;
         }
 
@@ -46,7 +46,7 @@ class Cache {
      * @return boolean Сохранено ли значение
      */
     public function Save($key, $value) {
-        if (!$this->IsConnected) {
+        if (!$this->DbConnected) {
             return false;
         }
 
