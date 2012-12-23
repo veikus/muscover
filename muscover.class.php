@@ -26,8 +26,17 @@ class MusCover {
             $url .= '&' . $k . '='. rawurlencode($v);
         }
 
-        $data = file_get_contents($url); // TODO (Artem): Rewrite to curl
-        if (!$data) {
+        // Request to last.fm api
+        $ch = curl_init($url);
+
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 3);
+        curl_setopt($ch, CURLOPT_REFERER, 'http://muscover.veikus.com/');
+        $data = curl_exec($ch);
+        curl_close($ch);
+
+        if (empty($data)) {
             return false;
         }
 
