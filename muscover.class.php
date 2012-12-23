@@ -1,7 +1,13 @@
 <?php
 
 class MusCover {
-    private $ApiKey = LASTFM_API_KEY;
+    private $ApiKey             = LASTFM_API_KEY;
+    private $AllowedCoverSizes  = array(
+        'small'      => true,
+        'medium'     => true,
+        'large'      => true,
+        'extralarge' => true
+    );
 
     function __contruct() {
         return true;
@@ -26,6 +32,25 @@ class MusCover {
         }
 
         return json_decode($data, 1);
+    }
+
+    /**
+     * Check is selected cover size is correct
+     * @param string $size Cover size
+     *
+     * @return bool Is cover size correct
+     */
+    public function CheckCoverSize($size) {
+        return array_key_exists($size, $this->AllowedCoverSizes);
+    }
+
+    /**
+     * Get allowed cover sizes
+     *
+     * @return array List of allowed sizes
+     */
+    public function GetCoverSizes() {
+        return array_keys($this->AllowedCoverSizes);
     }
 
     /**
