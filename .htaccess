@@ -1,4 +1,4 @@
 RewriteEngine On
 RewriteBase /
-RewriteRule ^track/(.*)/(.*)/(.*)$      load_track.php?type=track&artist=$1&track=$2&size=$3      [L]
-RewriteRule ^track/(.*)/(.*)$           load_track.php?type=track&artist=$1&track=$2&size=small   [L]
+RewriteRule ^track/(.*)/(.*)/(.*)$      load_track.php?artist=$1&track=$2&size=$3      [L]
+RewriteRule ^track/(.*)/(.*)$           load_track.php?artist=$1&track=$2&size=small   [L]
