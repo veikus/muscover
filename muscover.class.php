@@ -72,12 +72,12 @@ class MusCover {
     public function SearchByTrack($artist, $track) {
         $data = $this->LoadFromApi('track.getInfo', array('artist' => $artist, 'track' => $track, 'autocorrect' => 1));
 
-        // Default dumb images
+        // Default dummy images
         $images = array(
-            'small'         => 'http://placehold.it/64x64',
-            'medium'        => 'http://placehold.it/126x126',
-            'large'         => 'http://placehold.it/174x174',
-            'extralarge'    => 'http://placehold.it/300x300',
+            'small'         => 'http://muscover.veikus.com/dummy/no_album_small.jpg',
+            'medium'        => 'http://muscover.veikus.com/dummy/no_album_medium.jpg',
+            'large'         => 'http://muscover.veikus.com/dummy/no_album_large.jpg',
+            'extralarge'    => 'http://muscover.veikus.com/dummy/no_album_extralarge.jpg',
         );
 
         if (empty($data['track']['album']['image'])) {
@@ -107,12 +107,12 @@ class MusCover {
     public function SearchByAlbum($artist, $album) {
         $data = $this->LoadFromApi('album.getInfo', array('artist' => $artist, 'album' => $album, 'autocorrect' => 1));
 
-        // Default dumb images
+        // Default dummy images
         $images = array(
-            'small'         => 'http://placehold.it/64x64',
-            'medium'        => 'http://placehold.it/126x126',
-            'large'         => 'http://placehold.it/174x174',
-            'extralarge'    => 'http://placehold.it/300x300',
+            'small'         => 'http://muscover.veikus.com/dummy/no_album_small.jpg',
+            'medium'        => 'http://muscover.veikus.com/dummy/no_album_medium.jpg',
+            'large'         => 'http://muscover.veikus.com/dummy/no_album_large.jpg',
+            'extralarge'    => 'http://muscover.veikus.com/dummy/no_album_extralarge.jpg',
         );
 
         if (empty($data['album']['image'])) {
@@ -142,12 +142,12 @@ class MusCover {
     public function SearchByArtist($artist) {
         $data = $this->LoadFromApi('artist.getInfo', array('artist' => $artist, 'autocorrect' => 1));
 
-        // Default dumb images
+        // Default dummy images
         $images = array(
-            'small'         => 'http://placehold.it/64x64',
-            'medium'        => 'http://placehold.it/126x126',
-            'large'         => 'http://placehold.it/174x174',
-            'extralarge'    => 'http://placehold.it/300x300',
+            'small'         => 'http://muscover.veikus.com/dummy/no_artist_small.jpg',
+            'medium'        => 'http://muscover.veikus.com/dummy/no_artist_medium.jpg',
+            'large'         => 'http://muscover.veikus.com/dummy/no_artist_large.jpg',
+            'extralarge'    => 'http://muscover.veikus.com/dummy/no_artist_extralarge.jpg',
         );
 
         if (empty($data['artist']['image'])) {
